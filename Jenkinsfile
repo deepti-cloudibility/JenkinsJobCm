@@ -9,9 +9,6 @@ node {
         stage('Build') {
             sh '/opt/apache-maven-3.5.4/bin/mvn clean install'
  
-            def pom = readMavenPom file:'pom.xml'
-            print pom.version
-            env.version = pom.version
         }
  
         stage('Image') {
