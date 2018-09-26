@@ -4,13 +4,12 @@ node {
             git url: 'https://github.com/piomin/sample-spring-microservices.git', credentialsId: 'github-piomin', branch: 'master'
         }
  
-        stage('Build') {
-            sh '/opt/apache-maven-3.5.4/bin/mvn package docker:build'
- 
-            def pom = readMavenPom file:'pom.xml'
-            print pom.version
-            env.version = pom.version
+        steps {
+        maven {
+            goals('mvn package docker:build')
+            mavenInstallation("ADOP Maven")
         }
+    }
  
         stage('Image') {
             dir ('discovery-service') {
