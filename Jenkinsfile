@@ -6,12 +6,12 @@ node {
 
     stage('Building code using Maven') {
     		echo "Building code using Maven"
-
+sh'''
     		mvn package docker:build
     		def pom = readMavenPom file:'pom.xml'
             print pom.version
             env.version = pom.version
-
+'''
         
     }
 
