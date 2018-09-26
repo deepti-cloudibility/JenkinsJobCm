@@ -1,7 +1,5 @@
 node {
  
-    withMaven(maven:'maven') {
- 
         stage('Checkout') {
             git url: 'https://github.com/piomin/sample-spring-microservices.git', credentialsId: 'github-piomin', branch: 'master'
         }
@@ -9,6 +7,9 @@ node {
         stage('Build') {
             sh '/opt/apache-maven-3.5.4/bin/mvn clean install'
  
+            def pom = readMavenPom file:'pom.xml'
+            print pom.version
+            env.version = pom.version
         }
  
         stage('Image') {
@@ -28,4 +29,3 @@ node {
  
     }
  
-}
