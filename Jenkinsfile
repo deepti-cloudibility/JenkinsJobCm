@@ -4,15 +4,12 @@ node {
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'cdc8bad9-d6c7-44ad-a45b-181805d80465', url: 'https://github.com/cloudibility/channelmanager-proxy.git']]])
     }
 
-    tools {
-    maven 'mvn-3.5.4'
-  }
-
-  stages {
     stage('Build') {
-      steps {
-        sh 'mvn package Docker:build'
-      }
-    }
-  }   
-}
+            sh 'mvn clean install'
+ 
+            def pom = readMavenPom file:'pom.xml'
+            print pom.version
+            env.version = pom.version
+         }
+    
+     }
