@@ -6,7 +6,7 @@ node {
  
         stage('Build') {
             sh '/opt/apache-maven-3.5.4/bin/mvn package'
-             sh '/opt/apache-maven-3.5.4/bin/mvn package dockerfile:build'
+             sh '/opt/apache-maven-3.5.4/bin/mvn package docker:build'
          
             def pom = readMavenPom file:'pom.xml'
             print pom.version
