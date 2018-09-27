@@ -5,7 +5,7 @@ node {
         }
  
         stage('Build') {
-            sh '/opt/apache-maven-3.5.4/bin/mvn package'
+            sh '/opt/apache-maven-3.5.4/bin/mvn clean install'
              
          
             def pom = readMavenPom file:'pom.xml'
