@@ -14,7 +14,7 @@ node {
        }
  
     stage('Publish') {
-  nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'channelmanager-discovery.jar', type: 'jar']], credentialsId: 'nexusAdmin1', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '0.0.1-SNAPSHOT'
-}
+  nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin1', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '0.0.1-SNAPSHOT'
+    }
 }
  
