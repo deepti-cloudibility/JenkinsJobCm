@@ -13,5 +13,8 @@ node {
             env.version = pom.version
        }
  
-    }
+    stage('Publish') {
+  nexusArtifactUploader credentialsId: 'nexusAdmin1', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '0.0.1-SNAPSHOT'
+  }
+}
  
