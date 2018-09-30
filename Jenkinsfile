@@ -15,7 +15,6 @@ node{
  
     stage('Publish') {
 def pom = readMavenPom file: 'pom.xml'
-  credentialsId: 'nexusAdmin', \
   nexusPublisher nexusInstanceId: 'nexus3', \
   nexusRepositoryId: 'jenkins-artifacts', \
   packages: [[$class: 'MavenPackage', \
