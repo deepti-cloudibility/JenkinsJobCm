@@ -14,7 +14,17 @@ node{
        }
  
     stage('Publish') {
-nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: '/var/lib/jenkins/workspace/rdttdcr_master-PTDWPPD6RLNY2OMGI322VIHZTVQC5AQWC2YOIV2FOJDH4XOBPNXA/target/docker/channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin1', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '0.0.1-SNAPSHOT'
-    }
- 
+def pom = readMavenPom file: 'pom.xml'
+  credentialsId: 'nexusAdmin', \
+  nexusPublisher nexusInstanceId: 'nexus3', \
+  nexusRepositoryId: 'jenkins-artifacts', \
+  packages: [[$class: 'MavenPackage', \
+  mavenAssetList: [[classifier: '', extension: '', \
+  filePath: "target/${pom.artifactId}-${pom.version}.${pom.packaging}"]], \
+  mavenCoordinate: [artifactId: "${pom.artifactId}", \
+  groupId: "${pom.groupId}", \
+  packaging: "${pom.packaging}", \
+  version: "${pom.version}"]]]
+  }
 }
+
