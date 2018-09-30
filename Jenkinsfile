@@ -14,6 +14,6 @@ node{
        }
  
     stage('Upload') {
-    nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081/nexus', nexusVersion: 'nexus3', protocol: 'http', repository: 'Snapshot', version: '$BUILD_NUMBER'
+    nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'Snapshot', version: '0.0.1-SNAPSHOT'
     }
 }
