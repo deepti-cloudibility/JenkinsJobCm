@@ -13,17 +13,7 @@ node{
             env.version = pom.version
        }
  
-    stage('Publish') {
-def pom = readMavenPom file: 'pom.xml'
-  nexusPublisher nexusInstanceId: 'nexus3', \
-  nexusRepositoryId: 'jenkins-artifacts', \
-  packages: [[$class: 'MavenPackage', \
-  mavenAssetList: [[classifier: '', extension: '', \
-  filePath: "target/${pom.artifactId}-${pom.version}.${pom.packaging}"]], \
-  mavenCoordinate: [artifactId: "${pom.artifactId}", \
-  groupId: "${pom.groupId}", \
-  packaging: "${pom.packaging}", \
-  version: "${pom.version}"]]]
-  }
+    stage('Upload') {
+    nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'owasp/target/channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081/nexus', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '0.0.1-SNAPSHOT'
+    }
 }
-
