@@ -1,15 +1,6 @@
-def wrappedWorkspace(body) {
-    node {
-        if(env.WORKSPACE.contains("@")) {
-            ws (env.WORKSPACE.replace("@", "__")) {
-                body()
-            }
-        }else{
-            body()
-        }
-    }
-}
-
+node{
+    customWorkspace "${JENKINS_HOME}/Workspace/${URLDecoder.decode(JOB_NAME)}/${BUILD_NUMBER}"
+   }
 node {
  
  stage('Checkout Source code') { 
