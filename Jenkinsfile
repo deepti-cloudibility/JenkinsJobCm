@@ -1,4 +1,6 @@
 node{
+    label 'my-node-label'
+    customWorkspace "MyFixedLocation/MyPipelineName_${BRANCH_NAME}"
     stage('Checkout Source code') {
     	echo "Checking out latest from Github.."
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'cdc8bad9-d6c7-44ad-a45b-181805d80465', url: 'https://github.com/cloudibility/channelmanager-discovery.git']]])
@@ -7,7 +9,7 @@ node{
     stage('Building maven') {
     		echo "Building code using Maven"
     sh '/opt/apache-maven-3.5.4/bin/mvn package docker:build'
-            pwd()
+    sh 'pwd'
     		def pom = readMavenPom file:'pom.xml'
             print pom.version
             env.version = pom.version
