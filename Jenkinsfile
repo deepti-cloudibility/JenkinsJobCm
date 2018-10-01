@@ -7,7 +7,7 @@ node{
     stage('Building maven') {
     		echo "Building code using Maven"
     sh '/opt/apache-maven-3.5.4/bin/mvn package docker:build'
- 
+            pwd()
     		def pom = readMavenPom file:'pom.xml'
             print pom.version
             env.version = pom.version
