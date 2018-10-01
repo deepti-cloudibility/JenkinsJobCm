@@ -1,6 +1,3 @@
-node{
-    customWorkspace "${JENKINS_HOME}/Workspace/${URLDecoder.decode(JOB_NAME)}/${BUILD_NUMBER}"
-   }
 node {
  
  stage('Checkout Source code') { 
