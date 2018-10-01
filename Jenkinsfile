@@ -1,3 +1,15 @@
+def wrappedWorkspace(body) {
+    node {
+        if(env.WORKSPACE.contains("@")) {
+            ws (env.WORKSPACE.replace("@", "__")) {
+                body()
+            }
+        }else{
+            body()
+        }
+    }
+}
+
 node {
  
  stage('Checkout Source code') { 
