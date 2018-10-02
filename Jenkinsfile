@@ -20,8 +20,7 @@ node {
                   }
       
  stage('Building and running') {
-          step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'ExecuteCommandInsideContainer', command: 'docker-compose up -d', index: 1, privilegedMode: false, service: 'discovery', workDir: ''], useCustomDockerComposeFile: false])
-     
+          step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartService', scale: 1, service: 'discovery'], useCustomDockerComposeFile: false])
            }
       
  
