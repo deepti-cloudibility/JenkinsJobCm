@@ -20,7 +20,8 @@ node {
                   }
       
  stage('Building and running') {
-           step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartService', scale: 1, service: 'channelmanager-discovery'], useCustomDockerComposeFile: true])
+           step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'ExecuteCommandInsideContainer', command: 'docker-compose up -d', index: 1, privilegedMode: false, service: 'channelmanager-discovery', workDir: '/var/lib/jenkins/workspace/test01_master-YC5XRICYOG2NHN6C2YH7YS5MDNHMD3ITX4MII7VNK2M4KKVI4LJQ'], useCustomDockerComposeFile: false])
+
      
            }
       
