@@ -20,7 +20,7 @@ node {
                   }
  stage('upload docker images to nexus'){
        sh '''
-       docker login 34.238.84.40:8085
+       docker login -f 34.238.84.40:8085
        docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest
        docker push 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest'''
            }
