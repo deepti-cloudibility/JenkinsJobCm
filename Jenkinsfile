@@ -19,11 +19,17 @@ node {
       nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'target/docker/channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '$version'
                   }
  stage('upload docker images to nexus'){
-       sh '''
-       docker login -f 34.238.84.40:8085
-       docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest
-       docker push 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest'''
-           }
+       withCredentials ([string (credentialsId: 'nexusAdmin')]) {
+        withEnv (["NEXUS_URL=http://34.238.84.40:8081/"]) {
+          dir ('jenky-docker') {
+            sh "pwd"
+            dir ('docker/push') {
+              sh "docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
+              sh "docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
+            }
+          }
+        }
+      }
       
  stage('Building and running') {
           step([$class: 'DockerComposeBuilder', dockerComposeFile: '/opt/docker-compose.yml', option: [$class: 'StartService', scale: 1, service: 'discovery'], useCustomDockerComposeFile: true])
