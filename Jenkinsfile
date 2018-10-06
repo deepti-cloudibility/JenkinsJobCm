@@ -30,7 +30,7 @@ node {
           }
         }
       }
-      
+ }
  stage('Building and running') {
           step([$class: 'DockerComposeBuilder', dockerComposeFile: '/opt/docker-compose.yml', option: [$class: 'StartService', scale: 1, service: 'discovery'], useCustomDockerComposeFile: true])
            }
