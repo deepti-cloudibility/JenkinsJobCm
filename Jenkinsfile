@@ -23,6 +23,14 @@ node {
               sh "docker login 34.238.84.40:8085 -u admin -p admin123"
               sh "docker tag imageId 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
               sh "docker push 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
+              echo "printing environment variables"
+              sh '''echo "BUILD_NUMBER" :: $BUILD_NUMBER
+                 echo "BUILD_ID" :: $BUILD_ID
+                 echo "BUILD_DISPLAY_NAME" :: $BUILD_DISPLAY_NAME
+                 echo "JOB_NAME" :: $JOB_NAME
+                 echo "JOB_BASE_NAME" :: $JOB_BASE_NAME
+                 echo "BUILD_TAG" :: $BUILD_TAG'''
+
             }
           }
         }
