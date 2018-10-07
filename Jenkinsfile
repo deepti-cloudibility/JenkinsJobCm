@@ -21,7 +21,7 @@ node {
           dir ('jenky-docker') {
             sh "pwd"
               sh "docker login 34.238.84.40:8085 -u admin -p admin123"
-              sh "docker tag imageId 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
+              sh "docker tag imageid 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
               sh "docker push 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
               echo "printing environment variables"
               sh '''echo "BUILD_NUMBER" :: $BUILD_NUMBER
