@@ -29,7 +29,7 @@ node {
           dir ('jenky-docker') {
             sh "pwd"
              sh 'echo uname=$USERNAME pwd=$PASSWORD'
-              sh "docker login 34.238.84.40:8085 -u NEXUS_USERNAME -p NEXUS_PASSWORD"
+              sh "docker login 34.238.84.40:8085 -u $USERNAME -p $PASSWORD"
               sh "docker tag $BUILD_ID 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
               sh "docker push 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
              
