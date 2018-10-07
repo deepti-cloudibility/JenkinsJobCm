@@ -17,12 +17,12 @@ node {
   
  stage('upload docker images to nexus'){
        withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
-        withEnv (["NEXUS_URL=http://34.238.84.40:8081/"]) {
+        withEnv (["NEXUS_DOCKERURL=http://34.238.84.40:8085/"]) {
           dir ('jenky-docker') {
             sh "pwd"
-              sh "docker login 34.238.84.40:8085"
+   
               sh "docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
-              sh "docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
+             
             }
           }
         }
