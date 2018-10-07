@@ -17,13 +17,14 @@ node {
  
   stage('Upload artifacts to nexus') {
       nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'target/docker/channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '$version'
-                  }
+            }
+  
  stage('upload docker images to nexus'){
-       withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'USER_PASSWORD', usernameVariable: 'USER_NAME')]) {
+       withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
         withEnv (["NEXUS_URL=http://34.238.84.40:8081/"]) {
           dir ('jenky-docker') {
             sh "pwd"
-            dir ('docker/push') {
+              sh "docker login 34.238.84.40:8085"
               sh "docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
               sh "docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
             }
