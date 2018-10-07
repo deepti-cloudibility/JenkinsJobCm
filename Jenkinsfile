@@ -22,7 +22,7 @@ node {
             sh "pwd"
    
               sh "docker tag channelmanager-discovery:latest 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
-             
+              SH "docker push 34.238.84.40:8085/jenky-docker/channelmanager-discovery:latest"
             }
           }
         }
