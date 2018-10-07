@@ -14,10 +14,6 @@ node {
             env.version = pom.version
             sh "pwd"
           }
- 
-  stage('Upload artifacts to nexus') {
-      nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'target/docker/channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '$version'
-            }
   
  stage('upload docker images to nexus'){
        withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
