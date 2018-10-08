@@ -25,7 +25,7 @@ node {
  
  stage('Publish') {
 def pom = readMavenPom file: 'pom.xml'
-  withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) ,\
+  withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
   nexusRepositoryId: "jenkins-artifacts", \
   packages: [[$class: 'MavenPackage', \
   mavenAssetList: [[classifier: '', extension: '', \
