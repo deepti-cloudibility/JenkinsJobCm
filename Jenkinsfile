@@ -25,7 +25,7 @@ node {
  
  stage('Publish') {
 def pom = readMavenPom file: 'pom.xml'
-  withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) { , \
+  withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) ,\
   nexusRepositoryId: "jenkins-artifacts", \
   packages: [[$class: 'MavenPackage', \
   mavenAssetList: [[classifier: '', extension: '', \
@@ -35,7 +35,7 @@ def pom = readMavenPom file: 'pom.xml'
   packaging: "${pom.packaging}", \
   version: "${pom.version}"]]]
   }
- }
+ 
  stage('upload docker images to nexus'){
        withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
         withEnv (["NEXUS_DOCKERURL=34.238.84.40:8085"]) {
