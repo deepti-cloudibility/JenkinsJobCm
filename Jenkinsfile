@@ -23,11 +23,19 @@ node {
                  echo "BUILD_TAG" :: $BUILD_TAG'''
           }
  
- stage('Upload') {
-            echo "Uploading artifacts to Nexus..."
-            nexusArtifactUploader artifacts: [[artifactId: 'channelmanager-discovery', classifier: 'debug', file: 'target/docker/channelmanager-discovery-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexusAdmin', groupId: 'com.applicity.channelmanager', nexusUrl: '34.238.84.40:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'jenkins-artifacts', version: '$version'
-                  }
-  
+ stage('Publish') {
+def pom = readMavenPom file: 'pom.xml'
+  withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+  nexusRepositoryId: 'jenkins-artifacts', \
+  packages: [[$class: 'MavenPackage', \
+  mavenAssetList: [[classifier: '', extension: '', \
+  filePath: "target/${pom.artifactId}-${pom.version}.${pom.packaging}"]], \
+  mavenCoordinate: [artifactId: "${pom.artifactId}", \
+  groupId: "${pom.groupId}", \
+  packaging: "${pom.packaging}", \
+  version: "${pom.version}"]]]
+  }
+ }
  stage('upload docker images to nexus'){
        withCredentials([usernamePassword(credentialsId: 'nexusAdmin', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
         withEnv (["NEXUS_DOCKERURL=34.238.84.40:8085"]) {
