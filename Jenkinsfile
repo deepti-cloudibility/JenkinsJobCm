@@ -31,7 +31,7 @@ node {
              sh 'echo uname=$USERNAME pwd=$PASSWORD'
              println(env.USERNAME)
               sh "docker login $NEXUS_DOCKERURL -u $USERNAME -p $PASSWORD"
-              sh "docker tag $BUILD_ID $NEXUS_DOCKERURL/jenky-docker/channelmanager-discovery:latest"
+              sh "docker tag channelmanager-discovery:latest $NEXUS_DOCKERURL/jenky-docker/channelmanager-discovery:latest"
               sh "docker push $NEXUS_DOCKERURL/jenky-docker/channelmanager-discovery:latest"
              
 
